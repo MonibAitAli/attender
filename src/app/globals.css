@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0b1f1a;
+  --ink-2: #12332b;
+  --ink-3: #1a4439;
+  --chalk: #f4f0e6;
+  --chalk-dim: #cfc9b8;
+  --marigold: #e9b44c;
+  --mint: #7cc7a6;
+  --coral: #e76f51;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(circle at 12% -8%, rgba(233, 180, 76, 0.12), transparent 30rem),
+    radial-gradient(circle at 100% 108%, rgba(124, 199, 166, 0.09), transparent 28rem),
+    radial-gradient(rgba(244, 240, 230, 0.09) 1px, transparent 1px);
+  background-size: auto, auto, 24px 24px;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: var(--marigold);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--marigold);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-marigold text-ink hover:bg-[#f0c264];
+  }
+
+  .btn-ghost {
+    @apply btn border border-chalk/20 text-chalk hover:border-chalk/40 hover:bg-chalk/5;
+  }
+
+  .btn-quiet {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium text-chalk-dim transition-colors hover:bg-chalk/10 hover:text-chalk disabled:opacity-40;
+  }
+
+  .btn-danger {
+    @apply btn border border-coral/40 text-coral hover:bg-coral/10;
+  }
+
+  .btn-ink {
+    @apply btn bg-ink text-chalk hover:bg-ink-2;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-chalk/20 bg-ink-2 px-3.5 py-2.5 text-sm text-chalk placeholder:text-chalk-dim/40 focus:border-marigold focus:outline-none;
+  }
+
+  .field-light {
+    @apply w-full rounded-lg border border-ink/20 bg-white/70 px-3.5 py-2.5 text-sm text-ink placeholder:text-ink/35 focus:border-ink focus:outline-none;
+  }
+
+  .label {
+    @apply text-xs font-semibold tracking-wide text-chalk-dim;
+  }
+
+  .label-light {
+    @apply text-xs font-semibold tracking-wide text-ink/60;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-chalk/10 bg-ink-2/60;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-marigold;
+  }
+
+  .data-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.12em] text-chalk-dim;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flash-in {
+  0% {
+    background-color: rgba(233, 180, 76, 0.22);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.animate-flash {
+  animation: flash-in 1.6s ease-out both;
+}
+
+.animate-ping-soft {
+  animation: ping-soft 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.check-path {
+  stroke-dasharray: 60;
+  animation: check-draw 0.55s ease-out 0.12s both;
+}
+
+.animate-sweep {
+  animation: sweep 1.5s ease-in-out infinite;
+}
+
+.ticket-edge {
+  background-image: radial-gradient(circle at 0 50%, transparent 8px, var(--chalk) 8.5px),
+    radial-gradient(circle at 100% 50%, transparent 8px, var(--chalk) 8.5px);
+  background-size: 51% 100%, 51% 100%;
+  background-position: left, right;
+  background-repeat: no-repeat;
+}
+
+.ledger-row {
+  transition: background-color 160ms ease;
+}
+
+.ledger-row:hover {
+  background-color: rgba(244, 240, 230, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
